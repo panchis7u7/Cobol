@@ -13,12 +13,12 @@
 
 000900 INPUT-OUTPUT SECTION.
 001000 FILE-CONTROL.
-      *    SELECT CustomerFile ASSIGN TO "Cusomer.dat" ORGANIZATION IS LINE 
+      *    SELECT CustomerFile ASSIGN TO "Cusomer.dat" ORGANIZATION IS LINE
       *    SEQUENTIAL.
       *    ACCESSO ALEATORIO EN VEZ DE SEQUENCIAL.
-           SELECT CustomerFile ASSIGN TO "customer.txt" 
-           ORGANIZATION IS INDEXED 
-           ACCESS MODE IS RANDOM 
+           SELECT CustomerFile ASSIGN TO "customer.txt"
+           ORGANIZATION IS INDEXED
+           ACCESS MODE IS RANDOM
            RECORD KEY IS IDNum.
 
 001100 DATA DIVISION.
@@ -28,7 +28,7 @@
                02 IDNum PIC 99.
                02 FirstName PIC X(15).
                02 LastName PIC X(15).
-           
+
 001700 WORKING-STORAGE SECTION.
 001800 01 Choice PIC 9.
        01 StayOpen PIC X VALUE 'Y'.
@@ -73,7 +73,7 @@
                INVALID KEY DISPLAY "ID tomado."
            END-WRITE.
 
-       DeleteCust. 
+       DeleteCust.
            CALL 'SYSTEM' USING 'clear'
            DISPLAY " "
            DISPLAY "Ingrese el ID para eliminar: " WITH NO ADVANCING.
@@ -81,15 +81,15 @@
            DELETE CustomerFile
                INVALID KEY DISPLAY "Llave no existe!"
            END-DELETE.
-          
+
        UpdateCust.
            CALL 'SYSTEM' USING 'clear'
            MOVE 'Y' TO CustExists.
            DISPLAY " "
-           DISPLAY "Ingrese ID que se quiere actualizar: " WITH NO 
+           DISPLAY "Ingrese ID que se quiere actualizar: " WITH NO
            ADVANCING.
            ACCEPT IDNum.
-           READ CustomerFile 
+           READ CustomerFile
                INVALID KEY MOVE 'N' TO CustExists
            END-READ
            IF CustExists = 'N'
@@ -100,7 +100,7 @@
                DISPLAY "Ingrese los apellidos: " WITH NO ADVANCING
                ACCEPT LastName
            END-IF.
-           REWRITE CustomerData 
+           REWRITE CustomerData
                INVALID KEY DISPLAY "Cliente no actualizado."
            END-REWRITE.
 
@@ -108,7 +108,7 @@
            CALL 'SYSTEM' USING 'clear'
            MOVE 'Y' TO CustExists.
            DISPLAY " "
-           DISPLAY "Ingrese el ID del cliente a encontrar: " WITH NO 
+           DISPLAY "Ingrese el ID del cliente a encontrar: " WITH NO
            ADVANCING.
            ACCEPT IDNum.
            READ CustomerFile
@@ -116,12 +116,12 @@
            END-READ
            IF CustExists = 'N'
                DISPLAY "El cliente no existe."
-           ELSE 
+           ELSE
                DISPLAY " "
                DISPLAY "------ Resultado -----"
                DISPLAY "ID: " IDNum
                DISPLAY "Nombre: " FirstName
-               DISPLAY "Apellidos: " LastName 
+               DISPLAY "Apellidos: " LastName
                DISPLAY "----------------------"
                DISPLAY " "
            END-IF.
