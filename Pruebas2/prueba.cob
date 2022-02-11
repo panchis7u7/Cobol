@@ -15,9 +15,13 @@
 000900 DATA DIVISION.
 001000 FILE SECTION.
 001100 WORKING-STORAGE SECTION.
+       01 VAR PIC 99.
 
 001200 PROCEDURE DIVISION.
 001300 MAIN-PROC.
-001400     DISPLAY "Hola Mundo desde COBOL." END-DISPLAY.
-           STOP RUN.
+001400     COMPUTE VAR = 6 / 3 END-COMPUTE.
+           DISPLAY "Hola Mundo desde COBOL. El resultado de la "
+           "computacion es: ", VAR
+           END-DISPLAY.
+           GOBACK.
        END PROGRAM Prueba.
